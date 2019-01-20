@@ -41,7 +41,7 @@
       width: 100%;
       height: 100%;
       flex: 1;
-      margin: 20px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       overflow: auto;

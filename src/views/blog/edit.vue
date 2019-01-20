@@ -12,11 +12,12 @@
         </el-select>
       </el-form-item>
 
-       <el-form-item label="内容">
+      <el-form-item label="内容">
 
-         <div id="editor">
-           <mavon-editor style="height: 100%"></mavon-editor>
-         </div>
+        <div id="editor">
+          <mavon-editor ref="mavon" @imgAdd="imgAdd" :boxShadow="false" codeStyle="monokai-sublime" style="height: 100%"
+                        v-model="cont"></mavon-editor>
+        </div>
 
       </el-form-item>
 
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-  import { mavonEditor } from 'mavon-editor'
+  import {mavonEditor} from 'mavon-editor'
   import 'mavon-editor/dist/css/index.css'
 
   export default {
@@ -56,7 +57,24 @@
     },
     data() {
       return {
-        form: {}
+        form: {},
+        cont: ''
+      }
+    },
+    methods: {
+      onSubmit() {
+        console.log(this.cont);
+      },
+      imgAdd(name, file) {
+        console.log(file);
+        let formdata = new FormData();
+        formdata.append('file', file);
+        this.$Axios.post('/yun/oss/upload', formdata, '', {headers: {'Content-Type': 'multipart/form-data'}}).then(res => {
+          console.log(res);
+          if (res.code === 200) {
+            this.$refs.mavon.$img2Url(name, `${res.data.url}?x-oss-process=style/bstu.cn`);
+          }
+        })
       }
     }
 
@@ -67,17 +85,17 @@
   @import "~@/assets/less/theme.less";
 
   #editor {
-    width: calc(100% - 1px);
+    width: 100%;
     height: 580px;
     margin: 0;
-    /deep/ .v-note-op {
-      box-shadow: none;
-      border: 1px solid #e0e0e0;
-    }
-    /deep/ .v-note-panel {
-      box-shadow: none;
-      border: 1px solid #e0e0e0;
-      margin-top: -1px;
-    }
+    /*/deep/ .v-note-op {*/
+    /*box-shadow: none;*/
+    /*border: 1px solid #e0e0e0;*/
+    /*}*/
+    /*/deep/ .v-note-panel {*/
+    /*box-shadow: none;*/
+    /*border: 1px solid #e0e0e0;*/
+    /*margin-top: -1px;*/
+    /*}*/
   }
 </style>

@@ -7,12 +7,13 @@
         @select="handleSelect"
         :default-active="actives"
         :default-openeds="openeds">
-      <el-submenu :index="i" v-for="(item, i) in menu" v-if="item.meta && item.meta.isShow && item.children">
+      <el-submenu :key="i" :index="i" v-for="(item, i) in menu" v-if="item.meta && item.meta.isShow && item.children">
         <template slot="title">
           <i :class="item.meta.icon"></i>
           <span>{{item.meta && item.meta.title}}</span>
         </template>
         <el-menu-item
+            :key="index"
             :route="{name: it.name}"
             :index="`${i}-${index}`"
             v-for="(it, index) in item.children"

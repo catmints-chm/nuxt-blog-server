@@ -1,1 +1,1 @@
-var defUrl = '';
+var defUrl = 'http://localhost:3001';

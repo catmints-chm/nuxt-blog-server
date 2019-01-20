@@ -65,6 +65,7 @@ const get = (url, name = 'defUrl', config) => {
  */
 const post = (url, parms, name = 'defUrl', config) => {
   console.log(parms);
+  !name && (name = 'defUrl');
   let postUrl = window[name] + url;
   return new Promise((resolve, reject) => {
     // NProgress.start();
