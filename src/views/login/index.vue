@@ -21,7 +21,7 @@
 
     methods: {
       submitForm() {
-
+        this.$router.replace({path: '/admin'})
       },
     }
   }

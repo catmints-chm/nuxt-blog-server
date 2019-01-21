@@ -59,11 +59,6 @@ Vue.config.productionTip = false;
 Vue.prototype.$Axios = Axios;
 Vue.prototype.$Tool = Tool;
 
-// 解决VUE路由跳转到第二页位置不在顶部问题
-router.afterEach((to, from, next) => {
-  window.scrollTo(0, 0);
-});
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

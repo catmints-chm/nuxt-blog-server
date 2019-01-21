@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    博客后台配置中心
+    博客管理
   </div>
 </template>
 
